@@ -14,4 +14,12 @@ public class PointTest {
         double rsl = x.distance(y);
         assertThat(rsl, closeTo(2, 5.999));
     }
+
+    @Test
+    public void testDistance3d() {
+        Point x = new Point(1, 2, 3);
+        Point y = new Point(0, 2, 5);
+        double rsl = x.distance3d(y);
+        assertThat(rsl, closeTo(3, 4.999));
+    }
 }
