@@ -2,6 +2,7 @@ package ru.job4j.oop;
 
 import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
@@ -21,6 +22,6 @@ public class PointTest {
         Point x = new Point(1, 2, 3);
         Point y = new Point(0, 2, 5);
         double rsl = x.distance3d(y);
-        assertThat(rsl, is(2.23606797749979));
+        assertEquals(rsl, 2.23, 0.01);
     }
 }
