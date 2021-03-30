@@ -9,7 +9,7 @@ public class College {
         student.setGroup("Intern");
         student.setEntrance(new Date());
 
-        System.out.println("Student " + student.getSurname() + '\n' + " group "
-                + student.getGroup() + '\n' + " enrolled " + student.getEntrance());
+        System.out.println("Student " + student.getSurname() + System.lineSeparator() + "group "
+                + student.getGroup() + System.lineSeparator() + "enrolled " + student.getEntrance());
     }
 }
