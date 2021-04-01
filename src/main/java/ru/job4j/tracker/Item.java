@@ -43,5 +43,6 @@ public class Item {
         Item first = new Item();
         Item second = new Item("second");
         Item third = new Item("third", 3);
+        first.setId(2);
     }
 }
