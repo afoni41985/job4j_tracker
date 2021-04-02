@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.Arrays;
+import java.util.spi.AbstractResourceBundleProvider;
 
 public class Tracker {
     private final Item[] items = new Item[100];
@@ -32,7 +33,7 @@ public class Tracker {
     }
 
     public Item[] findAll() {
-       return Arrays.copyOf(items, size);
+        return Arrays.copyOf(items, size);
     }
 
     public Item[] findByName(String key) {
@@ -62,8 +63,11 @@ public class Tracker {
 
     public boolean delete(int id) {
         int index = indexOf(id);
-        System.arraycopy(items, index + 1, items, index, size - index - 1);
+        if (index == -1) {
+            return false;
+        }
+        System.arraycopy(items, index + 1, items, index, size - index);
         size--;
-        return indexOf(id) != -1;
+        return true;
     }
 }
