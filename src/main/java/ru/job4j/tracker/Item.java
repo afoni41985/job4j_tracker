@@ -39,6 +39,12 @@ public class Item {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "Item{" + "id=" + id + ", name='"
+                + name + '\'' + ", created=" + created + '}';
+    }
+
     public static void main(String[] args) {
         Item first = new Item();
         Item second = new Item("second");
