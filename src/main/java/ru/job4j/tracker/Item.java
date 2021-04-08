@@ -44,11 +44,4 @@ public class Item {
         return "Item{" + "id=" + id + ", name='"
                 + name + '\'' + ", created=" + created + '}';
     }
-
-    public static void main(String[] args) {
-        Item first = new Item();
-        Item second = new Item("second");
-        Item third = new Item("third", 3);
-        first.setId(2);
-    }
 }
