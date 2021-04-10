@@ -71,4 +71,69 @@ public class StartUITest {
         ));
     }
 
+    @Test
+    public void whenFindAllAction() {
+        Output output = new StubOutput();
+        Tracker tracker = new Tracker();
+        // Добавим в tracker новую заявку
+        Item item = tracker.add(new Item("first item"));
+        Input in = new StubInput(
+                //  0 - это пункт меню "Создать новую заявку"
+                //"Item name" - это будет имя новой заявки.
+                //1 - это пункт меню "Выйти".
+                new String[]{"0", "1"}
+        );
+        // Показать меню
+        UserAction[] actions = {
+                new ShowAction(),
+                new ExitAction(output)
+        };
+        new StartUI(output).init(in, tracker, actions);
+        assertThat(tracker.findAll()[0].getName(), is("first item"));
+    }
+
+    @Test
+    public void whenFindByNameAction() {
+        Output output = new StubOutput();
+        Tracker tracker = new Tracker();
+        // Добавим в tracker новую заявку
+        Item item = tracker.add(new Item("second item"));
+        Input in = new StubInput(
+                //  0 - это пункт меню "Создать новую заявку"
+                //"Item name" - это будет имя новой заявки.
+                //1 - это пункт меню "Выйти".
+                new String[]{"0", "second item", "1"}
+        );
+        // Показать меню
+        UserAction[] actions = {
+                new FindByNameAction(output),
+                new ExitAction(output)
+        };
+        new StartUI(output).init(in, tracker, actions);
+        Item[] result = tracker.findByName(item.getName());
+        assertThat(result[0].getName(), is(item.getName()));
+    }
+
+    @Test
+    public void whenFindByIdAction() {
+        Output output = new StubOutput();
+        Tracker tracker = new Tracker();
+        // Добавим в tracker новую заявку
+        Item item = tracker.add(new Item("third item"));
+        Input in = new StubInput(
+                //  0 - это пункт меню "Создать новую заявку"
+                //"Item name" - это будет имя новой заявки.
+                //1 - это пункт меню "Выйти".
+                new String[]{"0", String.valueOf(item.getId()), "1"}
+        );
+        // Показать меню
+        UserAction[] actions = {
+                new FindByIdAction(output),
+                new ExitAction(output)
+        };
+        new StartUI(output).init(in, tracker, actions);
+        Item[] result = tracker.findByName(item.getName());
+        assertThat(result[0].getId(), is(item.getId()));
+    }
+
 }
