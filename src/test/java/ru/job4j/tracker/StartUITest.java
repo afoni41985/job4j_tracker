@@ -73,67 +73,71 @@ public class StartUITest {
 
     @Test
     public void whenFindAllAction() {
-        Output output = new StubOutput();
-        Tracker tracker = new Tracker();
-        // Добавим в tracker новую заявку
-        Item item = tracker.add(new Item("first item"));
+        Output out = new StubOutput();
         Input in = new StubInput(
-                //  0 - это пункт меню "Создать новую заявку"
-                //"Item name" - это будет имя новой заявки.
-                //1 - это пункт меню "Выйти".
                 new String[]{"0", "1"}
         );
-        // Показать меню
+        Tracker tracker = new Tracker();
         UserAction[] actions = {
                 new ShowAction(),
-                new ExitAction(output)
+                new ExitAction(out)
         };
-        new StartUI(output).init(in, tracker, actions);
-        assertThat(tracker.findAll()[0].getName(), is("first item"));
+        new StartUI(out).init(in, tracker, actions);
+        assertThat(out.toString(), is(
+                "Menu." + System.lineSeparator()
+                        + "0. === Show all items ====" + System.lineSeparator()
+                        + "1. Exit" + System.lineSeparator()
+                        + "Menu." + System.lineSeparator()
+                        + "0. === Show all items ====" + System.lineSeparator()
+                        + "1. Exit" + System.lineSeparator() + ""));
     }
 
     @Test
     public void whenFindByNameAction() {
         Output output = new StubOutput();
         Tracker tracker = new Tracker();
-        // Добавим в tracker новую заявку
-        Item item = tracker.add(new Item("second item"));
+        Item item = tracker.add(new Item("testFindName", 0));
+
         Input in = new StubInput(
-                //  0 - это пункт меню "Создать новую заявку"
-                //"Item name" - это будет имя новой заявки.
-                //1 - это пункт меню "Выйти".
-                new String[]{"0", "second item", "1"}
+                new String[]{"0", item.getName(), "1"}
         );
-        // Показать меню
         UserAction[] actions = {
                 new FindByNameAction(output),
                 new ExitAction(output)
         };
         new StartUI(output).init(in, tracker, actions);
-        Item[] result = tracker.findByName(item.getName());
-        assertThat(result[0].getName(), is(item.getName()));
+        assertThat(output.toString(), is(
+                "Menu." + System.lineSeparator()
+                        + "0. === Find items by name ====" + System.lineSeparator()
+                        + "1. Exit" + System.lineSeparator()
+                        + "=== Find items by name ====" + System.lineSeparator()
+                        + item + System.lineSeparator()
+                        + "Menu." + System.lineSeparator()
+                        + "0. === Find items by name ====" + System.lineSeparator()
+                        + "1. Exit" + System.lineSeparator() + ""));
     }
 
     @Test
     public void whenFindByIdAction() {
-        Output output = new StubOutput();
         Tracker tracker = new Tracker();
-        // Добавим в tracker новую заявку
-        Item item = tracker.add(new Item("third item"));
+        Item item = tracker.add(new Item());
+        Output output = new StubOutput();
         Input in = new StubInput(
-                //  0 - это пункт меню "Создать новую заявку"
-                //"Item name" - это будет имя новой заявки.
-                //1 - это пункт меню "Выйти".
                 new String[]{"0", String.valueOf(item.getId()), "1"}
         );
-        // Показать меню
         UserAction[] actions = {
                 new FindByIdAction(output),
                 new ExitAction(output)
         };
         new StartUI(output).init(in, tracker, actions);
-        Item[] result = tracker.findByName(item.getName());
-        assertThat(result[0].getId(), is(item.getId()));
+        assertThat(output.toString(), is(
+                "Menu." + System.lineSeparator()
+                        + "0. === Find item by Id ====" + System.lineSeparator()
+                        + "1. Exit" + System.lineSeparator()
+                        + "=== Find item by Id ====" + System.lineSeparator()
+                        + item + System.lineSeparator()
+                        + "Menu." + System.lineSeparator()
+                        + "0. === Find item by Id ====" + System.lineSeparator()
+                        + "1. Exit" + System.lineSeparator() + ""));
     }
-
 }
