@@ -8,9 +8,10 @@ public class UserStore {
             if (users[i].getUsername().equals(login)) {
                 rsl = users[i];
                 break;
-            } else {
-                throw new UserNotFoundException(" user not found");
             }
+        }
+        if (rsl == null) {
+            throw new UserNotFoundException("User not found");
         }
         return rsl;
     }
