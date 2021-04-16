@@ -79,7 +79,7 @@ public class StartUITest {
         );
         Tracker tracker = new Tracker();
         UserAction[] actions = {
-                new ShowAction(),
+                new ShowAction(out),
                 new ExitAction(out)
         };
         new StartUI(out).init(in, tracker, actions);
@@ -87,9 +87,11 @@ public class StartUITest {
                 "Menu." + System.lineSeparator()
                         + "0. === Show all items ====" + System.lineSeparator()
                         + "1. Exit" + System.lineSeparator()
+                        + "=== Show all items ====" + System.lineSeparator()
                         + "Menu." + System.lineSeparator()
                         + "0. === Show all items ====" + System.lineSeparator()
                         + "1. Exit" + System.lineSeparator() + ""));
+
     }
 
     @Test
