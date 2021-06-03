@@ -52,4 +52,15 @@ public class ItemTest {
         Collections.sort(rsl, new SortByName().reversed());
         assertThat(rsl, is(expected));
     }
+
+    @Test
+    public void sortByDown() {
+        Item item1 = new Item("a", 1);
+        Item item2 = new Item("b", 2);
+        Item item3 = new Item("c", 3);
+        List<Item> rsl = Arrays.asList(item2, item3, item1);
+        List<Item> expected = Arrays.asList(item3, item2, item1);
+        Collections.sort(rsl, new SortDown());
+        assertThat(rsl, is(expected));
+    }
 }
