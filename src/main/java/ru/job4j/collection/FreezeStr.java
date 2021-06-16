@@ -6,23 +6,29 @@ import java.util.Map;
 
 public class FreezeStr {
     public static boolean eq(String left, String right) {
-        if (left.length() != right.length()) {
-            return false;
-        } else {
-            char[] chLeft = left.toCharArray();
-            char[] chRight = right.toCharArray();
-            Arrays.sort(chLeft);
-            Arrays.sort(chRight);
-            Map<Character, Integer> map1 = new HashMap<>();
-            Map<Character, Integer> map2 = new HashMap<>();
-
-            for (int i = 0; i < chLeft.length; i++) {
-                map1.put(chLeft[i], i);
-                map2.put(chRight[i], i);
+        char[] first = left.toCharArray();
+        char[] second = right.toCharArray();
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (char symbol : first) {
+            if (map.containsKey(symbol)) {
+                int temp = map.get(symbol);
+                map.put(symbol, ++temp);
+            } else {
+                map.put(symbol, 1);
             }
-
-            return map1.equals(map2);
         }
+        for (char symbol : second) {
+            if (map.containsKey(symbol)) {
+                if (map.get(symbol) > 1) {
+                    int temp = map.get(symbol);
+                    map.put(symbol, --temp);
+                } else {
+                    map.remove(symbol);
+                }
+            } else {
+                break;
+            }
+        }
+        return map.size() == 0;
     }
-
 }
