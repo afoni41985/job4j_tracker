@@ -8,9 +8,11 @@ import java.util.List;
 public class ProfilesTest {
 
     @Test
-    public void whenCollectSuccessful() {
+    public void whenCollectSuccessfulAndNoDuplicate() {
         Profiles prof = new Profiles();
         List<Profile> profiles = List.of(
+                new Profile(new Address("a", "b", 1, 2)),
+                new Profile(new Address("a", "b", 1, 2)),
                 new Profile(new Address("a", "b", 1, 2)),
                 new Profile(new Address("c", "d", 3, 4)),
                 new Profile(new Address("g", "j", 5, 6)),
