@@ -13,14 +13,14 @@ public class MapConvertTest {
     @Test
     public void whenCollectToMap() {
         List<Student> students = List.of(
-                new Student(100, "Sur1"),
-                new Student(80, "Sur2"),
-                new Student(100, "Sur1")
+                new Student("Sur1", 100),
+                new Student("Sur2", 80),
+                new Student("Sur1", 100)
         );
         Map<String, Student> rsl = MapConvert.convertList(students);
         Map<String, Student> expected = new HashMap<>();
-        expected.put("Sur1", new Student(100, "Sur1"));
-        expected.put("Sur2", new Student(80, "Sur2"));
+        expected.put("Sur1", new Student("Sur1", 100));
+        expected.put("Sur2", new Student("Sur2", 80));
         assertThat(rsl, is(expected));
     }
 }
