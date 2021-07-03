@@ -17,9 +17,9 @@ public class JobTest {
         Job item2 = new Job("two", 2);
         Job item3 = new Job("three", 3);
         Job item4 = new Job("four", 4);
-        List<Job> item = Arrays.asList(item3, item1, item4, item2);
-        List<Job> expected = Arrays.asList(item1, item2, item3, item4);
-        Collections.sort(item, new SortByPriorityUp());
+        List<Job> item = new java.util.ArrayList<>(List.of(item3, item1, item4, item2));
+        List<Job> expected = List.of(item1, item2, item3, item4);
+        item.sort(new SortByPriorityUp());
         assertThat(item, is(expected));
     }
 
