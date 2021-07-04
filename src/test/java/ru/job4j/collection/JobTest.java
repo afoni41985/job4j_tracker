@@ -17,7 +17,7 @@ public class JobTest {
         Job item2 = new Job("two", 2);
         Job item3 = new Job("three", 3);
         Job item4 = new Job("four", 4);
-        List<Job> item = new java.util.ArrayList<>(List.of(item3, item1, item4, item2));
+        List<Job> item = Arrays.asList(item3, item1, item4, item2);
         List<Job> expected = List.of(item1, item2, item3, item4);
         item.sort(new SortByPriorityUp());
         assertThat(item, is(expected));
@@ -30,8 +30,8 @@ public class JobTest {
         Job item3 = new Job("three", 3);
         Job item4 = new Job("four", 4);
         List<Job> item = Arrays.asList(item3, item1, item4, item2);
-        List<Job> expected = Arrays.asList(item4, item3, item2, item1);
-        Collections.sort(item, new SortByPriorityDown());
+        List<Job> expected = List.of(item4, item3, item2, item1);
+        item.sort(new SortByPriorityDown());
         assertThat(item, is(expected));
     }
 
@@ -42,8 +42,8 @@ public class JobTest {
         Job item3 = new Job("three", 3);
         Job item4 = new Job("four", 4);
         List<Job> item = Arrays.asList(item3, item1, item4, item2);
-        List<Job> expected = Arrays.asList(item4, item1, item3, item2);
-        Collections.sort(item, new SortByNameUp());
+        List<Job> expected = List.of(item4, item1, item3, item2);
+        item.sort(new SortByNameUp());
         assertThat(item, is(expected));
     }
 
@@ -54,8 +54,8 @@ public class JobTest {
         Job item3 = new Job("three", 3);
         Job item4 = new Job("four", 4);
         List<Job> item = Arrays.asList(item3, item1, item4, item2);
-        List<Job> expected = Arrays.asList(item2, item3, item1, item4);
-        Collections.sort(item, new SortByNameDown());
+        List<Job> expected = List.of(item2, item3, item1, item4);
+        item.sort(new SortByNameDown());
         assertThat(item, is(expected));
     }
 
@@ -66,8 +66,8 @@ public class JobTest {
         Job item3 = new Job("b", 3);
         Job item4 = new Job("b", 4);
         List<Job> item = Arrays.asList(item1, item2, item3, item4);
-        List<Job> expected = Arrays.asList(item2, item4, item3, item1);
-        Collections.sort(item, new SortByNameDown().thenComparing(new SortByPriorityDown()));
+        List<Job> expected = List.of(item2, item4, item3, item1);
+        item.sort(new SortByNameDown().thenComparing(new SortByPriorityDown()));
         assertThat(item, is(expected));
     }
 
@@ -78,8 +78,8 @@ public class JobTest {
         Job item3 = new Job("b", 3);
         Job item4 = new Job("b", 4);
         List<Job> item = Arrays.asList(item1, item2, item3, item4);
-        List<Job> expected = Arrays.asList(item1, item3, item4, item2);
-        Collections.sort(item, new SortByNameUp().thenComparing(new SortByPriorityUp()));
+        List<Job> expected = List.of(item1, item3, item4, item2);
+        item.sort(new SortByNameUp().thenComparing(new SortByPriorityUp()));
         assertThat(item, is(expected));
     }
 }
