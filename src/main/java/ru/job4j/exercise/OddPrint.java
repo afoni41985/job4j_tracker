@@ -5,9 +5,7 @@ import java.util.Collections;
 public class OddPrint {
     public static void print(int[] array) {
         Arrays.stream(array)
-                .filter(num -> num % 2 == 0)
-                .boxed()
-                .sorted(Collections.reverseOrder())
+                .filter(num -> num % 2 != 0)
                 .forEach(System.out::println);
     }
 }
