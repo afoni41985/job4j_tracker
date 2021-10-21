@@ -6,7 +6,6 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StartUITest {
@@ -16,7 +15,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "Item name", "1"}
         );
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         List<UserAction> actions = List.of(
                 new CreateAction(output),
                 new ExitAction(output)
@@ -28,7 +27,7 @@ public class StartUITest {
     @Test
     public void whenReplaceItemStubInput() {
         Output output = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Replaced item"));
         String replacedName = "New item name";
         Input in = new StubInput(
@@ -45,7 +44,7 @@ public class StartUITest {
     @Test
     public void whenDeleteItemStubInput() {
         Output output = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Deleted item"));
         Input in = new StubInput(
                 new String[]{"0", String.valueOf(item.getId()), "1"}
@@ -64,7 +63,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0"}
         );
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         List<UserAction> actions = List.of(
                 new ExitAction(output)
         );
@@ -80,7 +79,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "1"}
         );
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         List<UserAction> actions = List.of(
                 new ShowAction(out),
                 new ExitAction(out)
@@ -100,7 +99,7 @@ public class StartUITest {
     @Test
     public void whenFindByNameAction() {
         Output output = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("testFindName", 0));
 
         Input in = new StubInput(
@@ -124,7 +123,7 @@ public class StartUITest {
 
     @Test
     public void whenFindByIdAction() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item());
         Output output = new StubOutput();
         Input in = new StubInput(
@@ -152,7 +151,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"1", "0" }
         );
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         List<UserAction> actions = List.of(
                 new ExitAction(out)
         );
