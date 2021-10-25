@@ -99,6 +99,8 @@ public class SqlTracker implements Store {
         List<Item> items = new ArrayList<>();
         try (PreparedStatement statement =
                      cn.prepareStatement("select * from items where name = ?")) {
+            statement.setString(1, key);
+            statement.execute();
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     items.add(new Item(
@@ -118,7 +120,9 @@ public class SqlTracker implements Store {
     public Item findById(int id) {
         Item items = null;
         try (PreparedStatement statement =
-                     cn.prepareStatement("select * from items where name = ?")) {
+                     cn.prepareStatement("select * from items where id = ?")) {
+            statement.setInt(1, id);
+            statement.execute();
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     items = new Item(
