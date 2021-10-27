@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import static org.hamcrest.Matchers.is;
-
 import static org.junit.Assert.assertThat;
 
 public class SqlTrackerTest {
